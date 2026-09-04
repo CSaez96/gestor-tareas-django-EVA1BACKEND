@@ -16,8 +16,6 @@ El proyecto demuestra:
 - Página personalizada de error 404.
 - Uso de un paquete externo: `django-widget-tweaks` para personalizar campos del formulario.
 
-> Esta primera versión no utiliza modelos, migraciones, CRUD ni persistencia de datos, de acuerdo con el alcance de la evaluación.
-
 ## Tecnologías
 
 - Python 3
@@ -88,12 +86,6 @@ La vista procesa los datos y determina:
 - Clasificación según horas estimadas.
 - Mensaje de resultado.
 
-Las tareas se mantienen en memoria durante la ejecución del servidor. No existe persistencia en base de datos en esta evaluación.
-
 ## Paquete externo
 
 Se utiliza `django-widget-tweaks` para personalizar los campos del formulario desde la plantilla mediante la etiqueta `render_field`. Esto permite aplicar atributos HTML sin duplicar la definición de los campos en la plantilla.
-
-## Autor
-
-Christian Sáez
