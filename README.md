@@ -36,7 +36,7 @@ El proyecto demuestra:
 Clonar el repositorio:
 
 ```bash
-git clone https://github.com/TU-USUARIO/gestor-tareas-django.git
+git clone https://github.com/CSaez96/gestor-tareas-django-EVA1BACKEND
 cd gestor-tareas-django
 ```
 
@@ -47,13 +47,6 @@ Crear el ambiente virtual:
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
-```
-
-### Linux/macOS
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
 ```
 
 Instalar dependencias:
@@ -103,4 +96,4 @@ Se utiliza `django-widget-tweaks` para personalizar los campos del formulario de
 
 ## Autor
 
-Nombre del estudiante
+Christian Sáez
