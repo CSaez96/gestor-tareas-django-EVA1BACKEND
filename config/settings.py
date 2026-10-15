@@ -60,7 +60,7 @@ TEMPLATES = [{
 WSGI_APPLICATION = "config.wsgi.application"
 ASGI_APPLICATION = "config.asgi.application"
 
-DB_ENGINE = os.getenv("DB_ENGINE", "sqlite").lower().strip()
+DB_ENGINE = os.getenv("DB_ENGINE", "mysql").lower().strip()
 if DB_ENGINE in ("sqlite", "sqlite3"):
     sqlite_name = os.getenv("DB_NAME", "db.sqlite3") or "db.sqlite3"
     db_path = Path(sqlite_name)
@@ -79,6 +79,8 @@ elif DB_ENGINE in ("postgres", "postgresql", "mariadb", "mysql"):
         "PASSWORD": os.getenv("DB_PASSWORD", ""),
         "HOST": os.getenv("DB_HOST", "127.0.0.1"),
         "PORT": os.getenv("DB_PORT", "5432" if backend.endswith("postgresql") else "3306"),
+        # La BD de pruebas es independiente; los permisos se otorgan en script 03.
+        "TEST": {"NAME": os.getenv("DB_TEST_NAME", "test_gestor_tareas_db")},
     }}
     if backend.endswith("mysql"):
         DATABASES["default"]["OPTIONS"] = {"charset": "utf8mb4"}

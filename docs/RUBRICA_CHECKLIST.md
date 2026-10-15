@@ -24,7 +24,7 @@ La rúbrica contiene **15 subcriterios** en 6 criterios, con niveles 0, 1, 2 y 3
 
 | Exigencia adicional | Evidencia / archivo |
 |---|---|
-| Scripts SQL: crear BD/usuario/permisos | `scripts/sql/01_postgresql...sql`, `scripts/sql/02_mariadb...sql` |
+| Scripts SQL: crear BD/usuario/permisos | `scripts/sql/01_mysql_crear_base_datos.sql`, `02_mysql_crear_usuario.sql`, `03_mysql_asignar_permisos.sql` |
 | `.env` para conexión y `SECRET_KEY` | `.env` local, `.env.example`, `config/settings.py` |
 | Historial de commits en GitHub | Requiere configurar remoto y realizar `git push`; **no se puede completar sin tu cuenta/repositorio** |
 | Evidencia de modelo, migraciones y funcionamiento | `docs/EVIDENCIAS.md` explica qué capturar en tu PC |

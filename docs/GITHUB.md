@@ -22,7 +22,7 @@ Confirma en GitHub que el nuevo commit se suma al historial anterior.
 
 ## 2) Si crearás un repositorio GitHub nuevo
 
-Este ZIP incluye una carpeta oculta `.git/` con dos commits locales: el estado del ZIP recibido como punto de partida y la ampliación de la Evaluación 2. Es **historia reconstruida localmente**, no sustituto del historial original.
+Este ZIP incluye una carpeta oculta `.git/` con varios commits locales: el estado del ZIP recibido como punto de partida y la ampliación de la Evaluación 2. Es **historia reconstruida localmente**, no sustituto del historial original.
 
 En GitHub crea un repositorio **vacío** (no marques README / gitignore automático). En la carpeta del proyecto:
 

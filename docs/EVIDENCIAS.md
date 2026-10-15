@@ -35,7 +35,9 @@ Mostrar `0001_initial [X]` en la base que realmente uses. Guardar captura real d
 
 ## 3. Scripts SQL y configuración
 
-Mostrar los archivos `scripts/sql/*.sql` y sus comandos `CREATE DATABASE`, `CREATE USER` y `GRANT`. Ejecutar el que corresponda a PostgreSQL o MariaDB y capturar el resultado real. Mostrar `.env` con valores de servidor y `DB_ENGINE`, pero **ocultar `DJANGO_SECRET_KEY` y `DB_PASSWORD`**.
+Mostrar los archivos `scripts/sql/01...03_mysql*.sql` y sus comandos `CREATE DATABASE`, `CREATE USER` y `GRANT`. Ejecutar los scripts MySQL 01, 02 y 03 en ese orden y capturar el resultado real. Mostrar `.env` con valores de servidor y `DB_ENGINE`, pero **ocultar `DJANGO_SECRET_KEY` y `DB_PASSWORD`**.
+
+Mostrar en Workbench `SHOW GRANTS FOR 'gestor_tareas_user'@'127.0.0.1'`, y la BD `gestor_tareas_db`. Para pruebas automatizadas, los permisos también incluyen `test_gestor_tareas_db`.
 
 ## 4. Proyecto y CRUD REST
 

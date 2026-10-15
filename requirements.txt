@@ -1,5 +1,6 @@
+# Evaluación 2 — dependencias para MySQL 8.4 LTS (Windows)
 Django>=5.2,<6.0
 djangorestframework>=3.16,<4.0
 django-widget-tweaks>=1.5,<2.0
 python-dotenv>=1.0,<2.0
-psycopg[binary]>=3.2,<4.0
+mysqlclient>=2.2.8,<3.0

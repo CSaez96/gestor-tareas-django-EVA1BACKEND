@@ -1,3 +1,0 @@
--r requirements.txt
-# Opcional: para DB_ENGINE=mariadb o mysql, requiere las bibliotecas nativas MariaDB/MySQL.
-mysqlclient>=2.2.7,<3.0

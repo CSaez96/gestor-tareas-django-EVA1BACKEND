@@ -20,8 +20,7 @@ media/
 .env
 .env.*
 !.env.example
-!.env.postgresql.example
-!.env.mariadb.example
+!.env.mysql.example
 
 # Editor / sistemas / logs
 .vscode/

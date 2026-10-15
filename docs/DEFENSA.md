@@ -20,7 +20,7 @@ En la primera evaluación las tareas estaban en una lista de Python (`TASKS`): s
 
 ### 5) ¿Cómo se protege la contraseña de la base y cuál es el rol de GitHub?
 
-Los valores de conexión y `DJANGO_SECRET_KEY` se leen desde `.env` mediante `python-dotenv` y `os.environ`. `.gitignore` evita subir el `.env` real al repositorio. Los archivos `.env.*.example` son plantillas sin credenciales. Los scripts SQL crean BD, usuario y permisos. GitHub guarda el código y el historial de cambios. La API está abierta solo para pruebas académicas locales: necesitaría autenticación antes de publicar.
+Los valores de conexión y `DJANGO_SECRET_KEY` se leen desde `.env` mediante `python-dotenv` y `os.environ`. `.gitignore` evita subir el `.env` real al repositorio. Los archivos `.env.*.example` son plantillas sin credenciales. Los tres scripts SQL para MySQL crean `gestor_tareas_db`, el usuario local y los permisos en la base de aplicación y en la base temporal para tests. GitHub guarda el código y el historial de cambios. La API está abierta solo para pruebas académicas locales: necesitaría autenticación antes de publicar.
 
 ## Demostración sugerida en clase
 

@@ -1,64 +1,23 @@
-# Gestor de Tareas - Backend con Python y Django
+# Gestor de Tareas — Evaluación N.º 2 de Backend
 
-## Descripción
+**Asignatura:** Programación Backend · **Docente:** Erick Bailey Rebolledo  
+**Estudiante:** Christian Ignacio Sáez Sáez · **Modalidad:** individual
 
-Aplicación web sencilla desarrollada con Python y Django para la Evaluación 1 de Backend.
+## Qué se entrega
 
-El proyecto demuestra:
+Continuación del proyecto de Evaluación 1: conserva interfaz web, formulario, prioridades, cálculo de carga, estadísticas y página 404. La Evaluación 2 incorpora un modelo **Task** persistente, migración, Django REST Framework, `ModelSerializer`, `ModelViewSet`, `DefaultRouter` y CRUD completo con GET / POST / PUT / PATCH / DELETE, además de base de datos parametrizable, scripts SQL, pruebas y Git.
 
-- Uso de variables y tipos de datos de Python.
-- Asignaciones y operaciones.
-- Operadores de comparación y lógicos.
-- Estructuras de control `if`, `elif`, `else` y `for`.
-- Integración de lógica Python dentro de una vista Django.
-- Rutas propias.
-- Página de bienvenida.
-- Página personalizada de error 404.
-- Uso de un paquete externo: `django-widget-tweaks` para personalizar campos del formulario.
+**Base de datos:** SQLite para probar en cualquier PC; PostgreSQL o MariaDB para demostrar los scripts de creación de base de datos, usuario y permisos pedidos en la pauta. No se ha impuesto un motor que la pauta no especifica. Puedes elegir PostgreSQL o MariaDB antes de generar las evidencias finales.
 
-> Esta primera versión no utiliza modelos, migraciones, CRUD ni persistencia de datos, de acuerdo con el alcance de la evaluación.
+## 1. Inicio rápido en Windows / PowerShell
 
-## Tecnologías
+Requisitos: Python 3.10 o superior, Git; para PostgreSQL/MariaDB necesitas instalar el servidor correspondiente.
 
-- Python 3
-- Django
-- django-widget-tweaks
-- Git
-- GitHub
-
-## Requisitos
-
-- Python 3 instalado.
-- Git instalado.
-
-## Instalación
-
-Clonar el repositorio:
-
-```bash
-git clone https://github.com/TU-USUARIO/gestor-tareas-django.git
-cd gestor-tareas-django
-```
-
-Crear el ambiente virtual:
-
-### Windows
-
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-```
-
-### Linux/macOS
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-Instalar dependencias:
-
-```bash
+```powershell
+cd ruta\a\gestor_tareas_django
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -74,38 +33,45 @@ python manage.py test -v 2
 python manage.py runserver
 ```
 
-Abrir:
+Abrir **http://127.0.0.1:8000/** (interfaz), **http://127.0.0.1:8000/api/** (API), **http://127.0.0.1:8000/api/tasks/** (CRUD REST).
 
-http://127.0.0.1:8000/
+Si PowerShell impide activar el entorno, puedes ejecutar directamente `.\.venv\Scripts\python.exe` en los comandos o cambiar la política solo para la sesión: `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`.
 
-## Rutas
+En macOS o Linux: `python3 -m venv .venv`, `source .venv/bin/activate` y continúa con los comandos `python`.
 
-- `/` — gestor de tareas.
-- `/about/` — información del proyecto.
-- Cualquier ruta inexistente — página 404 personalizada.
+## 2. Usar una base SQL con usuario y permisos
 
-## Funcionamiento
+**Importante:** el motor SQL requiere un servicio instalado y configurado. Los scripts del proyecto están **listos para ejecutar**, pero sus contraseñas son intencionalmente marcadores que debes reemplazar. Ninguna contraseña real va en GitHub.
 
-La aplicación permite ingresar una tarea, seleccionar su prioridad, indicar horas estimadas y si está completada.
+### Opción A — PostgreSQL (recomendada)
 
-La vista procesa los datos y determina:
+1. Instala PostgreSQL y verifica que esté iniciado.
+2. Edita `scripts/sql/01_postgresql_crear_bd_usuario_permisos.sql`: reemplaza `REEMPLAZAR_CON_PASSWORD_SEGURA` por tu contraseña local segura. Usa una contraseña sin comillas simples para este script, o escápalas según SQL.
+3. Abre una terminal en la carpeta raíz y ejecuta (administrador PostgreSQL):
+   ```powershell
+   psql -U postgres -h localhost -f scripts/sql/01_postgresql_crear_bd_usuario_permisos.sql
+   ```
+4. Sustituye `.env` por una copia de `.env.postgresql.example` y cambia `DJANGO_SECRET_KEY` y `DB_PASSWORD`. El usuario y el nombre de base deben coincidir con el script. Si el puerto o el host son otros, ajústalos.
+5. Instala `requirements.txt`, ejecuta `python manage.py migrate` y `python manage.py test -v 2`.
 
-- Estado de la tarea.
-- Nivel de prioridad.
-- Clasificación según horas estimadas.
-- Mensaje de resultado.
+El script crea la base `gestor_tareas_db`, el usuario `gestor_tareas_user`, asigna la propiedad de la base y otorga permisos. Se ejecuta solo una vez. Las tablas se crean **con migraciones Django**, no manualmente.
 
-Las tareas se mantienen en memoria durante la ejecución del servidor. No existe persistencia en base de datos en esta evaluación.
+### Opción B — MariaDB / MySQL
 
-## Paquete externo
+1. Instala e inicia MariaDB o MySQL.
+2. Edita `scripts/sql/02_mariadb_crear_bd_usuario_permisos.sql` y reemplaza el marcador de contraseña.
+3. Ejecuta como administrador:
+   ```powershell
+   mysql -u root -p
+   ```
+   Dentro de MySQL, ejecuta `SOURCE ruta/absoluta/al/proyecto/scripts/sql/02_mariadb_crear_bd_usuario_permisos.sql;` (usa barras `/`, sin espacios en la ruta o con ruta apropiadamente entre comillas según tu cliente).
+4. `Copy-Item .env.mariadb.example .env -Force` y reemplaza clave Django y contraseña de BD.
+5. `pip install -r requirements-mariadb.txt`, `python manage.py migrate`, `python manage.py test -v 2`.
 
-Se utiliza `django-widget-tweaks` para personalizar los campos del formulario desde la plantilla mediante la etiqueta `render_field`. Esto permite aplicar atributos HTML sin duplicar la definición de los campos en la plantilla.
+> MariaDB/MySQL utilizan el paquete `mysqlclient`; en algunos Windows se necesitan herramientas de compilación o un wheel compatible. Si la instalación falla, PostgreSQL es una alternativa respaldada por `requirements.txt`.
 
-## Autor
+**Nota:** SQLite no admite el mismo modelo de `CREATE USER`/`GRANT` por tratarse de una BD basada en archivo. Para evidenciar los scripts SQL requeridos por la pauta, demuestra PostgreSQL o MariaDB además de las pruebas locales.
 
-<<<<<<< HEAD
-Nombre del estudiante
-=======
 ## 3. Archivos y estructura
 
 ```text
@@ -166,4 +132,3 @@ La interfaz web permite crear/consultar/editar/eliminar en `/`, y Django Admin p
 La pauta solicita una API CRUD, pero no especifica autenticación. Por ello las rutas API usan `AllowAny` para **demostración local**. **No exponer este servidor a Internet ni utilizarlo en producción** sin autenticación, autorizaciones, HTTPS, secretos seguros y `DEBUG=False`.
 
 El ZIP se prepara con una estructura Git local que parte del ZIP recibido y agrega cambios de la evaluación 2; este historial reconstruido **no sustituye los commits ni el repositorio GitHub original**. El proyecto aún debe ejecutarse en tu computador con sus dependencias y con la base elegida para generar evidencias verificables.
->>>>>>> be88511 (Evaluación 2: precisión de contrato API y estado honesto de verificación)
