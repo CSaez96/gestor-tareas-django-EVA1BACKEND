@@ -1,29 +1,13 @@
 {% extends "base.html" %}
-
 {% block title %}Acerca del proyecto{% endblock %}
-
 {% block content %}
 <div class="card">
     <h1>Acerca del proyecto</h1>
-
-    <p>
-        Este proyecto corresponde a una aplicación sencilla de gestión
-        de tareas desarrollada con Python y Django.
-    </p>
-
-    <h2>Conceptos demostrados</h2>
-
-    <ul>
-        <li>Variables y tipos de datos.</li>
-        <li>Asignaciones y operaciones.</li>
-        <li>Operadores de comparación y lógicos.</li>
-        <li>Estructuras de control.</li>
-        <li>Vistas y rutas Django.</li>
-        <li>Plantillas HTML.</li>
-        <li>Manejo personalizado de errores 404.</li>
-        <li>Uso de un paquete externo.</li>
-    </ul>
-
-    <a href="/">Volver al gestor</a>
+    <p>Gestor de tareas académico, continuación de la Evaluación 1 de Programación Backend.</p>
+    <h2>Evaluación 1 conservada</h2>
+    <ul><li>Lógica Python: prioridades, estados, horas y clasificación de carga.</li><li>Vistas y rutas Django.</li><li>Plantillas HTML y página 404 personalizada.</li><li>Formularios con django-widget-tweaks.</li></ul>
+    <h2>Evaluación 2 incorporada</h2>
+    <ul><li>Modelo Task y migración a base de datos.</li><li>Serializador, ModelViewSet, router y API REST.</li><li>GET, POST, PUT, PATCH y DELETE.</li><li>Administración Django, variables de entorno y scripts SQL.</li><li>Pruebas automáticas y control de versiones con Git.</li></ul>
+    <p><a href="/api/tasks/">Probar los endpoints en el navegador</a></p>
 </div>
 {% endblock %}

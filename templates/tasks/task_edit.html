@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Editar tarea{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Editar tarea #{{ task.pk }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% include "tasks/task_form_fields.html" %}
+        <div style="margin-top:18px">
+            <button type="submit">Guardar cambios</button>
+            <a class="btn btn-secondary" href="{% url 'task_manager' %}">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

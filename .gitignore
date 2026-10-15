@@ -1,4 +1,4 @@
-# Ambiente virtual
+# Ambientes virtuales
 .venv/
 venv/
 env/
@@ -6,23 +6,26 @@ env/
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
 
-# Django
-db.sqlite3
+# Django y archivos generados
 *.sqlite3
+db.sqlite3
+staticfiles/
+media/
 
-# Variables de entorno y secretos
+# NUNCA publicar secretos de conexión ni llave Django
 .env
 .env.*
+!.env.example
+!.env.postgresql.example
+!.env.mariadb.example
 
-# IDE
+# Editor / sistemas / logs
 .vscode/
 .idea/
-
-# Sistema operativo
 .DS_Store
 Thumbs.db
-
-# Logs
 *.log

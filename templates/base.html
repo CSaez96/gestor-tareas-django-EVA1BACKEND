@@ -5,60 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Gestor de Tareas{% endblock %}</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 30px;
-            background: #f5f5f5;
-            color: #222;
-        }
-        nav {
-            margin-bottom: 25px;
-        }
-        nav a {
-            margin-right: 15px;
-            text-decoration: none;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-        }
-        input, select, button {
-            padding: 9px;
-            margin: 5px 0 12px;
-        }
-        button {
-            cursor: pointer;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-        .message {
-            padding: 12px;
-            background: #e8f4ff;
-            margin-bottom: 15px;
-        }
-        .result {
-            padding: 15px;
-            background: #eef8ee;
-        }
+        :root { color-scheme: light; }
+        * { box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 1050px; margin: auto; padding: 24px; background: #f3f6fa; color: #172536; }
+        nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding: 14px 20px; border-radius: 10px; background: #153b64; margin-bottom: 20px; }
+        nav a { color: white; text-decoration: none; font-weight: 600; }
+        .card { background: white; padding: 23px; margin-bottom: 18px; border: 1px solid #e6ebf1; border-radius: 12px; box-shadow: 0 2px 8px #0b22340a; }
+        h1, h2 { margin: 0 0 16px; } h1 { font-size: 1.8rem; } h2 { font-size: 1.25rem; }
+        label { font-weight: 600; } input:not([type=checkbox]), select { width: 100%; max-width: 440px; display: block; padding: 10px; border: 1px solid #9cacbd; border-radius: 6px; margin: 8px 0 14px; background: white; }
+        button, .btn { border: 0; border-radius: 6px; background: #175b95; color: white; padding: 9px 13px; cursor: pointer; text-decoration: none; font-size: .92rem; display: inline-block; }
+        button:hover, .btn:hover { background: #0d416e; } .btn-secondary { background: #5b6879; } .btn-danger { background: #ad2932; }
+        .inline-form { display: inline; } .inline-form button { margin: 0; }
+        .message { padding: 12px 16px; margin-bottom: 15px; border-radius: 7px; background: #e3f5ea; color: #105a35; }
+        .errorlist { color: #b0242f; margin-top: 0; } .result { background: #f0faf4; }
+        .table-scroll { overflow-x: auto; } table { width: 100%; border-collapse: collapse; } th, td { padding: 12px; border-bottom: 1px solid #e7ebf0; text-align: left; white-space: nowrap; }
+        th { color: #56677c; background: #f8fafc; } .muted { color: #536479; } .actions { display: flex; gap: 7px; }
+        .stats { display: flex; gap: 18px; flex-wrap: wrap; } .stat { padding: 12px; background: #f1f5fb; border-radius: 8px; min-width: 128px; }
+        .stat strong { display: block; font-size: 1.5rem; } a { color: #0d5793; }
+        @media (max-width: 600px) { body { padding: 12px; } .card { padding: 15px; } nav { gap: 10px; } }
     </style>
 </head>
 <body>
     <nav>
-        <a href="/">Gestor de tareas</a>
-        <a href="/about/">Acerca del proyecto</a>
+        <a href="{% url 'task_manager' %}">Gestor de tareas</a>
+        <a href="{% url 'about' %}">Acerca del proyecto</a>
+        <a href="/api/tasks/">API REST</a>
+        <a href="/admin/">Administración</a>
     </nav>
-
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message" role="status">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
     {% block content %}{% endblock %}
 </body>
 </html>

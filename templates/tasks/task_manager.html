@@ -1,58 +1,22 @@
 {% extends "base.html" %}
-{% load widget_tweaks %}
-
-{% block title %}Gestor de Tareas{% endblock %}
-
+{% block title %}Gestor de Tareas | Evaluación 2{% endblock %}
 {% block content %}
 <div class="card">
     <h1>Gestor de Tareas</h1>
-    <p>
-        Aplicación backend desarrollada con Python y Django para administrar
-        tareas de forma sencilla.
-    </p>
+    <p class="muted">Evaluación 2 · Django REST Framework · CRUD persistente</p>
+    <p>La información se guarda en una base de datos y también está disponible mediante <a href="/api/tasks/">la API REST</a>.</p>
 </div>
-
 <div class="card">
-    <h2>Nueva tarea</h2>
-
-    {% if message %}
-        <div class="message">{{ message }}</div>
-    {% endif %}
-
-    <form method="post">
+    <h2>Crear tarea</h2>
+    <form method="post" action="{% url 'task_manager' %}">
         {% csrf_token %}
-
-        <label for="{{ form.name.id_for_label }}">Nombre de la tarea:</label><br>
-        {% render_field form.name class="task-input" %}
-        {% if form.name.errors %}
-            <small>{{ form.name.errors }}</small>
-        {% endif %}
-        <br>
-
-        <label for="{{ form.priority.id_for_label }}">Prioridad:</label><br>
-        {% render_field form.priority class="task-input" %}
-        <br>
-
-        <label for="{{ form.hours.id_for_label }}">Horas estimadas:</label><br>
-        {% render_field form.hours class="task-input" %}
-        {% if form.hours.errors %}
-            <small>{{ form.hours.errors }}</small>
-        {% endif %}
-        <br>
-
-        <label>
-            {% render_field form.completed %}
-            Tarea completada
-        </label>
-        <br>
-
-        <button type="submit">Procesar tarea</button>
+        {% include "tasks/task_form_fields.html" %}
+        <div style="margin-top:18px"><button type="submit">Guardar tarea</button></div>
     </form>
 </div>
-
 {% if task_result %}
 <div class="card result">
-    <h2>Resultado</h2>
+    <h2>Resultado de la tarea guardada</h2>
     <p><strong>Tarea:</strong> {{ task_result.name }}</p>
     <p><strong>Prioridad:</strong> {{ task_result.priority }}</p>
     <p><strong>Estado:</strong> {{ task_result.status }}</p>
@@ -61,47 +25,40 @@
     <p>{{ task_result.priority_message }}</p>
 </div>
 {% endif %}
-
 <div class="card">
     <h2>Resumen</h2>
-    <p><strong>Total de tareas:</strong> {{ total_tasks }}</p>
-    <p><strong>Completadas:</strong> {{ completed_tasks }}</p>
-    <p><strong>Pendientes:</strong> {{ pending_tasks }}</p>
-    <p><strong>Porcentaje de completitud:</strong> {{ completion_percentage }}%</p>
+    <div class="stats">
+        <div class="stat">Total <strong>{{ total_tasks }}</strong></div>
+        <div class="stat">Completadas <strong>{{ completed_tasks }}</strong></div>
+        <div class="stat">Pendientes <strong>{{ pending_tasks }}</strong></div>
+        <div class="stat">Avance <strong>{{ completion_percentage }}%</strong></div>
+    </div>
 </div>
-
 <div class="card">
-    <h2>Tareas registradas durante esta ejecución</h2>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Tarea</th>
-                <th>Prioridad</th>
-                <th>Horas</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for task in tasks %}
-            <tr>
-                <td>{{ task.name }}</td>
-                <td>{{ task.priority }}</td>
-                <td>{{ task.hours }}</td>
-                <td>
-                    {% if task.completed %}
-                        Completada
-                    {% else %}
-                        Pendiente
-                    {% endif %}
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="4">No existen tareas.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h2>Tareas guardadas</h2>
+    <div class="table-scroll">
+        <table>
+            <thead><tr><th>ID</th><th>Tarea</th><th>Prioridad</th><th>Horas</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{ task.hours }}</td>
+                    <td>{{ task.status }}</td>
+                    <td><div class="actions">
+                        <a class="btn" href="{% url 'task_edit' task.pk %}">Editar</a>
+                        <form class="inline-form" method="post" action="{% url 'task_delete' task.pk %}">
+                            {% csrf_token %}<button class="btn-danger" type="submit" onclick="return confirm('¿Eliminar esta tarea?');">Eliminar</button>
+                        </form>
+                    </div></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6">Aún no hay tareas registradas.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

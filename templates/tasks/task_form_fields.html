@@ -1,0 +1,15 @@
+{% load widget_tweaks %}
+{% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
+<label for="{{ form.name.id_for_label }}">Nombre de la tarea</label>
+{% render_field form.name %}
+{{ form.name.errors }}
+<label for="{{ form.priority.id_for_label }}">Prioridad</label>
+{% render_field form.priority %}
+{{ form.priority.errors }}
+<label for="{{ form.hours.id_for_label }}">Horas estimadas</label>
+{% render_field form.hours %}
+{{ form.hours.errors }}
+<label for="{{ form.completed.id_for_label }}">
+    {% render_field form.completed %} Tarea completada
+</label>
+{{ form.completed.errors }}
