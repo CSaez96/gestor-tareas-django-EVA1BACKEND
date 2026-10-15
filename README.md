@@ -16,6 +16,8 @@ El proyecto demuestra:
 - Página personalizada de error 404.
 - Uso de un paquete externo: `django-widget-tweaks` para personalizar campos del formulario.
 
+> Esta primera versión no utiliza modelos, migraciones, CRUD ni persistencia de datos, de acuerdo con el alcance de la evaluación.
+
 ## Tecnologías
 
 - Python 3
@@ -34,7 +36,7 @@ El proyecto demuestra:
 Clonar el repositorio:
 
 ```bash
-git clone https://github.com/CSaez96/gestor-tareas-django-EVA1BACKEND
+git clone https://github.com/TU-USUARIO/gestor-tareas-django.git
 cd gestor-tareas-django
 ```
 
@@ -47,21 +49,28 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
+### Linux/macOS
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
 Instalar dependencias:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Verificación
+> El ZIP trae un archivo `.env` configurado para pruebas **locales con SQLite** y una clave Django aleatoria de desarrollo. **No lo publiques ni lo subas a GitHub**. Si descargas el proyecto desde GitHub en vez del ZIP, crea tu propio `.env`: `Copy-Item .env.example .env` y reemplaza `DJANGO_SECRET_KEY` por una clave aleatoria segura.
+>
+> Para generar una clave: `python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"`.
 
-```bash
+```powershell
 python manage.py check
-```
-
-## Ejecución
-
-```bash
+python manage.py makemigrations --check --dry-run
+python manage.py migrate
+python manage.py test -v 2
 python manage.py runserver
 ```
 
@@ -86,6 +95,12 @@ La vista procesa los datos y determina:
 - Clasificación según horas estimadas.
 - Mensaje de resultado.
 
+Las tareas se mantienen en memoria durante la ejecución del servidor. No existe persistencia en base de datos en esta evaluación.
+
 ## Paquete externo
 
 Se utiliza `django-widget-tweaks` para personalizar los campos del formulario desde la plantilla mediante la etiqueta `render_field`. Esto permite aplicar atributos HTML sin duplicar la definición de los campos en la plantilla.
+
+## Autor
+
+Nombre del estudiante
