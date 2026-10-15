@@ -54,3 +54,5 @@ git check-ignore .env
 ```
 
 `.env` debe aparecer como ignorado. Si ya habías subido una clave real alguna vez, eliminarla de un commit nuevo no basta: hay que revocarla y revisar el historial. La evidencia de la pauta es la **URL pública o accesible del repositorio con commits**, algo que debes aportar desde tu propia cuenta.
+
+**Antes de entregar:** anota la URL real del repositorio aquí o en tu LMS. El valor `TU-USUARIO/TU-REPOSITORIO` es un ejemplo y no corresponde a un repositorio creado.

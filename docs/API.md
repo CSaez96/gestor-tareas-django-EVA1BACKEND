@@ -37,7 +37,7 @@ Códigos esperados: GET `200`; POST `201`; PUT/PATCH `200`; DELETE `204`; datos 
 ## Reglas de validación
 
 - `name`: texto no vacío de hasta 100 caracteres (se recortan espacios iniciales/finales).
-- `priority`: exactamente `Alta`, `Media` o `Baja`.
+- `priority`: exactamente `Alta`, `Media` o `Baja`; en POST, si se omite se usa `Media`.
 - `hours`: número con hasta 6 dígitos en total, 2 decimales, mayor o igual que cero.
 - `completed`: verdadero o falso; en POST es opcional y asume `false`.
 - `id`, `created_at`, `updated_at`: campos generados en el servidor, solo lectura.
